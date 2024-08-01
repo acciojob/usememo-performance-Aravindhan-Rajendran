@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
+import '../styles/App.css';
 
 // Utility function to generate tasks
 const generateTasks = () => {
