@@ -29,15 +29,15 @@ const App = () => {
   const [filter, setFilter] = useState('All');
   const [darkMode, setDarkMode] = useState(false);
   const [displayedTasks, setDisplayedTasks] = useState([]);
-
-  // Memoize filtered tasks
-  const filteredTasks = useMemo(() => {
+  
+// Memoize filtered tasks
+const displayedTasks = useMemo(() => {
     console.log('Filtering tasks'); // To show when useMemo is being used
     return tasks.filter(task => {
-      if (filter === 'All') return true;
-      return filter === 'Completed' ? task.completed : !task.completed;
+        if (filter === 'All') return true;
+        return filter === 'Completed' ? task.completed : !task.completed;
     });
-  }, [tasks, filter]);
+}, [tasks, filter]);
 
 useEffect(() => {
     setDisplayedTasks(filteredTasks);
@@ -51,11 +51,11 @@ useEffect(() => {
       <button onClick={() => setFilter('Completed')}>Completed</button>
       <button onClick={() => setDarkMode(prev => !prev)}>Toggle Dark Mode</button>
 
-      <ul className="task-list">
-        {displayedTasks.map(task => (
-          <Task key={task.id} task={task} />
-        ))}
-      </ul>
+<ul className="task-list">
+    {displayedTasks.map(task => (
+        <Task key={task.id} task={task} />
+    ))}
+</ul>
     </div>
   );
 };
