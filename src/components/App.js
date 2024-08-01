@@ -1,4 +1,5 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
+import './App.css';
 
 // Utility function to generate tasks
 const generateTasks = () => {
@@ -27,6 +28,7 @@ const App = () => {
   const [tasks] = useState(generateTasks());
   const [filter, setFilter] = useState('All');
   const [darkMode, setDarkMode] = useState(false);
+  const [displayedTasks, setDisplayedTasks] = useState([]);
 
   // Memoize filtered tasks
   const filteredTasks = useMemo(() => {
@@ -38,13 +40,13 @@ const App = () => {
   }, [tasks, filter]);
 
   // Artificially slow down rendering
-  const slowDownRendering = () => {
-    const end = Date.now() + 1000; // 1 second delay
-    while (Date.now() < end) {}
-  };
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDisplayedTasks(filteredTasks);
+    }, 1000); // 1 second delay
 
-  // Apply delay
-  slowDownRendering();
+    return () => clearTimeout(timer); // Cleanup on component unmount
+  }, [filteredTasks]);
 
   return (
     <div className={`app ${darkMode ? 'dark-mode' : ''}`}>
@@ -54,7 +56,7 @@ const App = () => {
       <button onClick={() => setDarkMode(prev => !prev)}>Toggle Dark Mode</button>
 
       <ul className="task-list">
-        {filteredTasks.map(task => (
+        {displayedTasks.map(task => (
           <Task key={task.id} task={task} />
         ))}
       </ul>
