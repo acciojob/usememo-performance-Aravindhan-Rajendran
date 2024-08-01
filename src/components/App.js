@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import './App.css';
 
 // Utility function to generate tasks
 const generateTasks = () => {
@@ -15,7 +16,11 @@ const generateTasks = () => {
 
 // Task Component
 const Task = ({ task }) => {
-  return <div className={`task ${task.completed ? 'completed' : 'active'}`}>{task.text}</div>;
+  return (
+    <li className={`task ${task.completed ? 'completed' : 'active'}`}>
+      {task.text}
+    </li>
+  );
 };
 
 // App Component
@@ -49,11 +54,11 @@ const App = () => {
       <button onClick={() => setFilter('Completed')}>Completed</button>
       <button onClick={() => setDarkMode(prev => !prev)}>Toggle Dark Mode</button>
 
-      <div className="task-list">
+      <ul className="task-list">
         {filteredTasks.map(task => (
           <Task key={task.id} task={task} />
         ))}
-      </div>
+      </ul>
     </div>
   );
 };
