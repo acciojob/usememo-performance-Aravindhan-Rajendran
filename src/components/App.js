@@ -39,14 +39,10 @@ const App = () => {
     });
   }, [tasks, filter]);
 
-  // Artificially slow down rendering
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setDisplayedTasks(filteredTasks);
-    }, 1000); // 1 second delay
+useEffect(() => {
+    setDisplayedTasks(filteredTasks);
+}, [filteredTasks]);
 
-    return () => clearTimeout(timer); // Cleanup on component unmount
-  }, [filteredTasks]);
 
   return (
     <div className={`app ${darkMode ? 'dark-mode' : ''}`}>
