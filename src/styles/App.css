@@ -1,1 +1,45 @@
+body {
+  font-family: Arial, sans-serif;
+}
 
+.app {
+  padding: 20px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.dark-mode {
+  background-color: #333;
+  color: #fff;
+}
+
+.task-list {
+  margin-top: 20px;
+  list-style-type: none;
+  padding: 0;
+}
+
+.task {
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+}
+
+.completed {
+  background-color: #d4edda;
+}
+
+.active {
+  background-color: #fff3cd;
+}
+
+button {
+  margin: 5px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.8;
+}
