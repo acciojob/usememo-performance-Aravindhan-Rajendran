@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import '../styles/App.css';
 
 const generateTasks = () => {
@@ -10,7 +10,6 @@ const generateTasks = () => {
       completed: i <= 25 // First 25 tasks are completed, others are active
     });
   }
-  console.log(tasks); // Log the tasks
   return tasks;
 };
 
@@ -27,15 +26,18 @@ const App = () => {
   const [tasks] = useState(generateTasks());
   const [filter, setFilter] = useState('All');
   const [darkMode, setDarkMode] = useState(false);
-  
+
   // Memoize filtered tasks
   const displayedTasks = useMemo(() => {
-      console.log('Filtering tasks'); // To show when useMemo is being used
-      return tasks.filter(task => {
-          if (filter === 'All') return true;
-          return filter === 'Completed' ? task.completed : !task.completed;
-      });
+    console.log('Filtering tasks'); // To show when useMemo is being used
+    return tasks.filter(task => {
+      if (filter === 'All') return true;
+      return filter === 'Completed' ? task.completed : !task.completed;
+    });
   }, [tasks, filter]);
+
+  // Debug log
+  console.log(displayedTasks);
 
   return (
     <div className={`app ${darkMode ? 'dark-mode' : ''}`}>
@@ -44,12 +46,11 @@ const App = () => {
       <button onClick={() => setFilter('Completed')}>Completed</button>
       <button onClick={() => setDarkMode(prev => !prev)}>Toggle Dark Mode</button>
 
-console.log(displayedTasks);
-<ul className="task-list">
-  {displayedTasks.map(task => (
-    <Task key={task.id} task={task} />
-  ))}
-</ul>
+      <ul className="task-list">
+        {displayedTasks.map(task => (
+          <Task key={task.id} task={task} />
+        ))}
+      </ul>
     </div>
   );
 };
