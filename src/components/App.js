@@ -1,7 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import '../styles/App.css';
 
-// Utility function to generate tasks
 const generateTasks = () => {
   const tasks = [];
   for (let i = 1; i <= 50; i++) {
@@ -11,6 +10,7 @@ const generateTasks = () => {
       completed: i <= 25 // First 25 tasks are completed, others are active
     });
   }
+  console.log(tasks); // Log the tasks
   return tasks;
 };
 
@@ -44,11 +44,12 @@ const App = () => {
       <button onClick={() => setFilter('Completed')}>Completed</button>
       <button onClick={() => setDarkMode(prev => !prev)}>Toggle Dark Mode</button>
 
-      <ul className="task-list">
-          {displayedTasks.map(task => (
-              <Task key={task.id} task={task} />
-          ))}
-      </ul>
+console.log(displayedTasks);
+<ul className="task-list">
+  {displayedTasks.map(task => (
+    <Task key={task.id} task={task} />
+  ))}
+</ul>
     </div>
   );
 };
