@@ -6,7 +6,7 @@ const generateTasks = () => {
   for (let i = 1; i <= 50; i++) {
     tasks.push({
       id: i,
-      text: `Task ${i}`,
+      text: `Todo ${i}`,
       completed: i <= 25 // First 25 tasks are completed, others are active
     });
   }
